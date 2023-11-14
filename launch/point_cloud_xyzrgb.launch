@@ -1,0 +1,31 @@
+<!-- -->
+<!-- Convert the depth image and the rgb image into a xyzrgb Point Cloud -->
+<launch>
+    <arg name="camera_info_topic" default="/airsim_node/Hydrone/Stereo_Cam/Scene/camera_info"/> 
+    <arg name="depth_topic" default="/airsim_node/Hydrone/Stereo_Cam/DepthPlanar"/> 
+    <arg name="rgb_topic" default="/airsim_node/Hydrone/Stereo_Cam/Scene"/> 
+    <arg name="point_cloud_topic" default="/camera/depth/points"/> 
+
+    <!--node name="update_frame_id" pkg="depth_image_proc" type="update_frame_id.py" output="screen" /-->
+
+    <!-- Nodelet manager for this pipeline -->
+    <node pkg="nodelet" type="nodelet" args="manager" name="standalone_nodelet" output="screen"/>
+
+
+
+    <!-- Convert to point cloud -->
+    <node pkg="nodelet" type="nodelet" name="depth_image_proc" args="load depth_image_proc/point_cloud_xyzrgb standalone_nodelet --no-bond">
+   
+        <remap from="camera_info" to="$(arg camera_info_topic)"/>
+        
+        <remap from="depth_registered/image_rect" to="$(arg depth_topic)"/>
+        
+        <remap from="image_rect_color" to="$(arg rgb_topic)"/>
+        
+        <remap from="depth_registered/points" to="$(arg point_cloud_topic)" />
+
+    </node>
+
+</launch>
+
+<!-- -->
