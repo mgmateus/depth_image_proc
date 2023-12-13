@@ -145,12 +145,12 @@ void PointCloudXyzNodelet::connectCb()
 
     // depth image can use different transport.(e.g. compressedDepth)
     image_transport::TransportHints depth_hints("raw",ros::TransportHints(), private_nh, depth_image_transport_param);
-    sub_depth_.subscribe(*it_, "/airsim_node/drone_1/front_center_custom_depth/DepthPerspective",       1, depth_hints);
+    sub_depth_.subscribe(*it_, "/airsim_node/Hydrone/Stereo_Cam/DepthPlanar",       1, depth_hints);
     ROS_INFO("Subscribing to depth image.");
 
     // rgb uses normal ros transport hints.
     image_transport::TransportHints hints("raw", ros::TransportHints(), private_nh);
-    sub_info_ .subscribe(*rgb_nh_,   "/airsim_node/drone_1/front_center_custom_color/Scene/camera_info",      1);
+    sub_info_ .subscribe(*rgb_nh_,   "/airsim_node/Hydrone/Stereo_Cam/Scene/camera_info",      1);
     ROS_INFO("Subscribing to camera info.");
     //image_transport::TransportHints hints("raw", ros::TransportHints(), getPrivateNodeHandle());
     //sub_depth_ = it_->subscribeCamera("/airsim_node/drone_1/front_center_custom_depth/DepthPerspective/", queue_size_, &PointCloudXyzNodelet::depthCb, this, hints);

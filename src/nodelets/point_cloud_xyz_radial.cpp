@@ -198,7 +198,7 @@ namespace depth_image_proc {
 
 		    // depth image can use different transport.(e.g. compressedDepth)
 		    image_transport::TransportHints depth_hints("raw",ros::TransportHints(), private_nh, depth_image_transport_param);
-		    sub_depth_.subscribe(*it_, "/airsim_node/Hydrone/DepthMap/DepthPerspective",       1, depth_hints);
+		    sub_depth_.subscribe(*it_, "/airsim_node/Hydrone/Stereo_Cam/DepthPlanar",       1, depth_hints);
 		    ROS_INFO("Subscribing to depth image.");
 
 		    // rgb uses normal ros transport hints.
